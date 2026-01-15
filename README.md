@@ -15,14 +15,7 @@ production environments.
 
 * * *
 
-## Package Overview
 
-The package contains a small set of LWC components usable directly in the CRM Analytics Studio to extend
-standard Dashboard capabilities (see **Components** of _Lightning Components_ type when editing a Dashboard).
-
-Please click on each component link to access more detailed information.
-
-### **[sfpegPlanningCmp](/help/sfpegPlanningCmp.md)** Component
 
 This LWC component was initially implemented to display a planning of all Campaigns active upon a given period.
 It takes a list elements as input and enables to display it as bars:
