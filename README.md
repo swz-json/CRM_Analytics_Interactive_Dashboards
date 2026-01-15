@@ -1,5 +1,4 @@
-
-# ![Logo](/media/Logo.png) &nbsp; SFPEG CRMA Components
+# CRMA Components
 
 
 ## Introduction
@@ -58,11 +57,6 @@ Typical use case is to leverage a CRM Analytics Dashboard embedded within a Camp
 Other use cases are mass reassignment of Accounts to new Owners (with possibly complex filters provided in the Dashboard), mass creation of callback or escalation tasks on Opportunities or Cases... possibly amending information on the selected records before executing the operation.
 
 
-* * *
-
-## Component Configuration
-
-To be continued
 
 * * *
 
@@ -76,7 +70,4 @@ elements displayed at the UX.
 
 * * *
 
-## Technical Details
-
-To be continued
 
