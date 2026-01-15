@@ -1,0 +1,113 @@
+<template>
+    <div class="rootContainer">
+        <template if:true={title}>
+            <div class="titleContainer slds-clearfix">
+                <div class={titleClass} style={titleStyle} >
+                    {title}
+                    <!--<lightning-formatted-text value={title}>
+                    </lightning-formatted-text>-->
+                    <a  if:true={isDebug}
+                        class="slds-m-left_x-small onlineHelp"
+                        href='https://github.com/pegros/PEG_CRMA/blob/master/help/sfpegPlanningCmp.md'
+                        target="_blank">
+                        <lightning-icon icon-name="utility:info"
+                                        variant="" size="xx-small"
+                                        alternative-text="Online Help" 
+                                        title="Click to access Online Help">
+                        </lightning-icon>
+                    </a>
+                </div>
+            </div>
+        </template>
+
+        <!-- Planning Display -->
+        <div class="planningContainer slds-scrollable slds-grid" style={planningStyle} if:true={hasData}>
+            <!--<div class="axisContainer slds-col slds-size_1-of-4 slds-grid slds-wrap slds-grid_vertical-align-start">-->
+            <div class={axisClass}>
+                <!-- Grouped version Axis -->
+                <template if:true={dsGroup}>
+                    <template for:each={axisData} for:item="groupIter">
+                        <div key={groupIter.index} class="groupItem slds-col slds-size_1-of-2 slds-truncate" title={groupIter.label}>
+                            <!--<p class="slds-truncate" title={groupIter.label}>{groupIter.label}</p>-->
+                            {groupIter.label}
+                        </div>
+                        <div key={groupIter.indexElt} class="groupElements slds-col slds-size_1-of-2" >
+                            <template for:each={groupIter.items} for:item="elementIter">
+                                <div key={elementIter.index} class="elementItem slds-truncate" title={elementIter.label}>
+                                    {elementIter.label}
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </template>
+
+                <!-- Flat version Axis -->
+                <template if:false={dsGroup}>
+                    <div class="groupElements slds-col slds-size_1-of-1" >
+                        <template for:each={axisData} for:item="elementIter">
+                            <div key={elementIter.label} class="elementItem slds-truncate" title={elementIter.label}>
+                                {elementIter.label}
+                            </div>
+                        </template>
+                    </div>
+                </template>
+
+                <!-- Horizontal Axis Space -->
+                <div class="axisSpace slds-col slds-size_1-of-1"></div>
+            </div>
+
+            <div class={containerClass}>
+                <!-- Main Planning SVG -->
+                <svg    xmlns="http://www.w3.org/2000/svg"
+                        class="mainSvg"
+                        width={svgWidth}
+                        height={svgHeight}>
+                        <!--lwc:dom="manual">   -->
+                        <template for:each={chartData} for:item="chartIter">
+                            <g key={chartIter.index}>
+                                <rect   class="elementBar" fill={chartIter.color}
+                                        height="18" width={chartIter.length}
+                                        x={chartIter.x} y={chartIter.y}
+                                        data-index={chartIter.index}
+                                        onmouseover={showPopup}
+                                        onmousemove={movePopup}
+                                        onmouseout={hidePopup} >
+                                </rect>
+                            </g>
+                        </template>
+                </svg>
+
+                <!-- Horizontal Axis SVG -->
+                <svg    xmlns="http://www.w3.org/2000/svg"
+                        class="timeAxis"
+                        width={svgWidth}
+                        height="26" >
+                </svg>
+            </div>
+        </div>
+
+        <!-- No data message -->
+        <div class="slds-align_absolute-center" if:false={hasData}>
+            <p class="slds-p-vertical_xx-large">{noResultsMessage}</p>
+        </div>
+
+        <!-- Legend -->
+        <template if:true={showLegend}>
+            <div class = "legendContainer slds-scrollable_x">
+                <div class="slds-align_absolute-center" style="background:white;">
+                    <template for:each={legendData} for:item="legendIter">
+                        <div key={legendIter.label} class="legendItem slds-text-body_small">
+                            <span class="itemCircle" style={legendIter.style}></span>
+                            {legendIter.label}
+                        </div> 
+                    </template>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- Detail on hover popup -->
+    <div class="elementPopup slds-hide">
+    </div>
+
+</template>
